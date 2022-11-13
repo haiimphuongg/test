@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import controller.ClientListener;
 import view.ClientDesign;
 
-public class Program {
+public class Client {
 	
 	//private ClientDesign clientDesign ; 
 	public static  Socket client = null;

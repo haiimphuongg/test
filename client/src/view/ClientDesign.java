@@ -1,25 +1,24 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import program.Client;
+import controller.AppListener;
 import controller.ClientListener;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-//import java.awt.event.ActionEvent;
 
 public class ClientDesign extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	public JPanel contentPane;
 	public JTextField txtIP;
 
 	/**
@@ -29,8 +28,20 @@ public class ClientDesign extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new ClientDesign();
-					
+					ClientDesign frame = new ClientDesign();
+					frame.setVisible(true);
+					frame.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+							String s = "EXIT";
+							try {
+								Client.out.write(s);
+								Client.out.newLine();
+								Client.out.flush();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,14 +49,16 @@ public class ClientDesign extends JFrame {
 		});
 	}
 
-	
-	
+	/**
+	 * Create the frame.
+	 */
 	public ClientDesign() {
-		
 		setTitle("Client");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 452, 284);
+		setLocationRelativeTo(null); // center
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -54,47 +67,45 @@ public class ClientDesign extends JFrame {
 		
 		txtIP = new JTextField();
 		txtIP.setText(" Enter IP:");
-		txtIP.setBounds(20, 10, 305, 34);
+		txtIP.setBounds(20, 10, 305, 35);
 		contentPane.add(txtIP);
 		txtIP.setColumns(10);
 		
-		ActionListener act = new ClientListener(this);
+		ActionListener ac = new ClientListener(this);
 		
 		JButton btnConnect = new JButton("Connect");
-		btnConnect.addActionListener(act);
+		btnConnect.addActionListener(ac);
 		btnConnect.setBounds(335, 9, 85, 35);
 		contentPane.add(btnConnect);
 		
 		JButton btnApp = new JButton("App Running");
-		btnApp.addActionListener(act);
 		btnApp.setBounds(20, 54, 140, 80);
+		btnApp.addActionListener(ac);
 		contentPane.add(btnApp);
 		
 		JButton btnKeystroke = new JButton("Keystroke");
-		btnKeystroke.addActionListener(act);
+		btnKeystroke.addActionListener(ac);
 		btnKeystroke.setBounds(170, 54, 120, 80);
 		contentPane.add(btnKeystroke);
 		
 		JButton btnCapture = new JButton("Capture");
-		btnCapture.addActionListener(act);
+		//btnCapture.addActionListener(ac);
 		btnCapture.setBounds(300, 54, 120, 80);
 		contentPane.add(btnCapture);
 		
 		JButton btnProcess = new JButton("Process Running");
-		btnProcess.addActionListener(act);
+		btnProcess.addActionListener(ac);
 		btnProcess.setBounds(20, 144, 140, 80);
 		contentPane.add(btnProcess);
 		
 		JButton btnShutdown = new JButton("Shutdown");
-		btnShutdown.addActionListener(act);
+		//btnShutdown.addActionListener(ac);
 		btnShutdown.setBounds(170, 144, 120, 80);
 		contentPane.add(btnShutdown);
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(act);
+		btnExit.addActionListener(ac);
 		btnExit.setBounds(300, 144, 120, 80);
 		contentPane.add(btnExit);
-		
-		this.setVisible(true);
 	}
 }

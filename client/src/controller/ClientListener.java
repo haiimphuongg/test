@@ -31,50 +31,51 @@ public class ClientListener implements ActionListener{
 		boolean test = true;
 		try {
 			int port = 6789;
-			Program.client = new Socket(clientDesign.txtIP.getText(), port);
+			Client.client = new Socket(clientDesign.txtIP.getText(), port);
 		} catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Error!" + e.getMessage());
             test = false;
-            Program.client = null;
+            Client.client = null;
 			//e.printStackTrace();
 		}
 		if(test) {
             JOptionPane.showMessageDialog(null, "Connected successfully!");
 
             // Create input and output streams to read from and write to the server
-            Program.in = new BufferedReader(new InputStreamReader(Program.client.getInputStream()));
-            Program.out = new BufferedWriter(new OutputStreamWriter(Program.client.getOutputStream()));
+            Client.in = new BufferedReader(new InputStreamReader(Client.client.getInputStream()));
+            Client.out = new BufferedWriter(new OutputStreamWriter(Client.client.getOutputStream()));
 		}
 	}
 		
 	private void AppListener() throws IOException {
-		if(Program.client == null) {
+		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
 			return;
 		}
 		String s = "APPLICATION";
-		Program.out.write(s);
-		Program.out.flush();
+		Client.out.write(s);
+		Client.out.flush();
 		new AppDesign().setVisible(true);
 	}
 	
 	private void ProcessListener() throws IOException {
-		if(Program.client == null) {
+		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
 			return;
 		}
 		String s = "PROCESS";
-		Program.out.write(s);
-		Program.out.flush();
+		Client.out.write(s);
+		Client.out.flush();
 		new ProcessDesign().setVisible(true);
 	}
 	
 	private void ExitListener() throws IOException {
 		String s = "EXIT";
-		if(Program.client != null) {
-			Program.out.write(s);
-			Program.out.newLine();
-			Program.out.flush();
+		if(Client.client != null) {
+			Client.out.write(s);
+			Client.out.newLine();
+			Client.out.flush();
+			Client.client.close();
 		}
 		clientDesign.setVisible(false);
 		// THOAT FRAME
@@ -82,14 +83,14 @@ public class ClientListener implements ActionListener{
 	
 	
 	private void KeylogListener() throws IOException{
-		if(Program.client == null) {
+		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
 			return;
 		}
 		String s = "KEYSTROKE";
-		Program.out.write(s);
-		Program.out.newLine();
-		Program.out.flush();
+		Client.out.write(s);
+		Client.out.newLine();
+		Client.out.flush();
 		new KeylogDesign().setVisible(true);
 		
 	}
@@ -122,9 +123,6 @@ public class ClientListener implements ActionListener{
 				e1.printStackTrace();
 			}
 		
-		//if(click.equals("Connect")) ConnectServer();
-		
-		//if(click.equals("Connect")) ConnectServer();
 		
 		if(click.equals("Exit"))
 			try {

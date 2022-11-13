@@ -33,7 +33,6 @@ public class KeyLog implements NativeKeyListener {
 	}
 
 	public void nativeKeyReleased(NativeKeyEvent e) {
-		//System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
 		
 	} 		 	
 	

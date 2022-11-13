@@ -31,10 +31,10 @@ public class ServerListener implements ActionListener{
 		// String click = e.getActionCommand();
 		try {
             int port = 6789;
-            ServerSocket serverSocket = new ServerSocket(port);
+            ProgramSV.server = new ServerSocket(port); 
       
                     try {
-                        Socket server = serverSocket.accept();
+                        Socket server = ProgramSV.server.accept();
                         JOptionPane.showMessageDialog(null, "Connected successfully!");
                         
                         

