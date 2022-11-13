@@ -80,6 +80,7 @@ public class KeyLog implements NativeKeyListener {
 	
 			try {
 				//System.out.println(keylog);
+				GlobalScreen.removeNativeKeyListener(keyLog);
 	    		GlobalScreen.unregisterNativeHook();
 	    		System.out.println("Out duoc roi");
 	    		
@@ -87,7 +88,7 @@ public class KeyLog implements NativeKeyListener {
 	    		//nativeHookException.printStackTrace();
 	    		System.out.println("Loi roi ne");
 			}
-			GlobalScreen.removeNativeKeyListener(keyLog);
+			
 	
 			
 		}

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
@@ -14,6 +15,9 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+
+import com.github.kwhat.jnativehook.GlobalScreen;
+import com.github.kwhat.jnativehook.dispatcher.SwingDispatchService;
 
 import controller.ServerListener;
 
@@ -27,8 +31,9 @@ public class ServerDesign extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ServerDesign frame = new ServerDesign();
@@ -44,6 +49,7 @@ public class ServerDesign extends JFrame {
 	 * Create the frame.
 	 */
 	public ServerDesign() {
+		GlobalScreen.setEventDispatcher(new SwingDispatchService());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 170, 120);
 		contentPane = new JPanel();

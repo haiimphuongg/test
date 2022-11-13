@@ -15,6 +15,7 @@ import controller.AppListener;
 import controller.ClientListener;
 
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 
 public class ClientDesign extends JFrame {
@@ -25,7 +26,7 @@ public class ClientDesign extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					ClientDesign frame = new ClientDesign();
