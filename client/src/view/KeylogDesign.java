@@ -156,13 +156,13 @@ public class KeylogDesign extends JFrame{
 		//thêm panelBackButton vào giao diện 
 		this.getContentPane().add(panelBackButton);
 		panelBackButton.setLayout(null);
-		
-		//Tạo nút Back to Menu 
-		JButton btnBackToMenu = new JButton("Back to Menu");
-		btnBackToMenu.setFont(new Font("Tahoma", Font.BOLD, 11));
-		//Tạo kích cỡ, vị trí cho nút Back to Menu
-		btnBackToMenu.setBounds(338, 0, 117, 30);
-		//Thêm nút Back to Menu vào panelBackButton
-		panelBackButton.add(btnBackToMenu);
+//		
+//		//Tạo nút Back to Menu 
+//		JButton btnBackToMenu = new JButton("Back to Menu");
+//		btnBackToMenu.setFont(new Font("Tahoma", Font.BOLD, 11));
+//		//Tạo kích cỡ, vị trí cho nút Back to Menu
+//		btnBackToMenu.setBounds(338, 0, 117, 30);
+//		//Thêm nút Back to Menu vào panelBackButton
+//		panelBackButton.add(btnBackToMenu);
 	}
 }

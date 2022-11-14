@@ -91,19 +91,7 @@ public class KeylogListener implements ActionListener{
 			this.keylogDesign.text.setText("");
 //			
 		}
-		else if ("Back to Menu".equals(scr))
-		{
-			try {
-				Client.out.write("EXIT_KEYSTROKE");
-				Client.out.newLine();
-				Client.out.flush();
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			this.keylogDesign.setVisible(false);
-			
-		}
+		
 	}
 	
 	

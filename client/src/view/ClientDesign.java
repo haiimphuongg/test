@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -34,12 +35,17 @@ public class ClientDesign extends JFrame {
 					frame.addWindowListener(new WindowAdapter() {
 						public void windowClosing(WindowEvent e) {
 							String s = "EXIT";
+							if(Client.client == null) {
+								return;
+							}
+							else {
 							try {
 								Client.out.write(s);
 								Client.out.newLine();
 								Client.out.flush();
 							} catch (IOException e1) {
-								e1.printStackTrace();
+								return;
+							}
 							}
 						}
 					});
@@ -99,13 +105,13 @@ public class ClientDesign extends JFrame {
 		btnProcess.setBounds(20, 144, 140, 80);
 		contentPane.add(btnProcess);
 		
-		JButton btnShutdown = new JButton("Shutdown");
-		//btnShutdown.addActionListener(ac);
+		JButton btnShutdown = new JButton("Control");
+		btnShutdown.addActionListener(ac);
 		btnShutdown.setBounds(170, 144, 120, 80);
 		contentPane.add(btnShutdown);
 		
 		JButton btnExit = new JButton("Exit");
-		//btnExit.addActionListener(ac);
+		btnExit.addActionListener(ac);
 		btnExit.setBounds(300, 144, 120, 80);
 		contentPane.add(btnExit);
 	}

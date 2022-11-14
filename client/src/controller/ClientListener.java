@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import Program.Client;
 import view.AppDesign;
 import view.ClientDesign;
+import view.ControlDesign;
 import view.KeylogDesign;
 import view.ProcessDesign;
 
@@ -22,6 +23,7 @@ public class ClientListener implements ActionListener{
 	private AppDesign appDesign;
 	private ProcessDesign processDesign;
 	private KeylogDesign keylogDesign;
+	private ControlDesign controlDesign;
 	public ClientListener(ClientDesign clientDesign) {
 		this.clientDesign = clientDesign;
 	}
@@ -85,12 +87,26 @@ public class ClientListener implements ActionListener{
 		
 	} 
 	
+	private void ControlListener() throws IOException{
+		if(Client.client == null) {
+			JOptionPane.showMessageDialog(null, "Not connected to the server");
+			return;
+		}
+		String s = "CONTROL";
+		Client.out.write(s);
+		Client.out.newLine();
+		Client.out.flush();
+		this.controlDesign.main(null);
+		
+	}
+	
 	private void ExitListener() throws IOException {
 		String s = "EXIT";
 		if(Client.client != null) {
 			Client.out.write(s);
 			Client.out.newLine();
 			Client.out.flush();
+			this.clientDesign.dispose();
 		}
 		clientDesign.setVisible(false);
 		// THOAT FRAME
@@ -148,6 +164,14 @@ public class ClientListener implements ActionListener{
 				this.ExitListener();
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}		
+		}	
+		
+		
+		if(click.equals("Control"))
+			try {
+				this.ControlListener();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 	}
 }	
