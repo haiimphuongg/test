@@ -1,18 +1,17 @@
-
 package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.BufferedWriter;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-import program.*;
+import Program.Client;
 import view.AppDesign;
 import view.ClientDesign;
 import view.KeylogDesign;
@@ -20,23 +19,23 @@ import view.ProcessDesign;
 
 public class ClientListener implements ActionListener{
 	private ClientDesign clientDesign;
-	//PrintStream out = new PrintStream( socket.getOutputStream() );
-    //BufferedReader in = new BufferedReader( new InputStreamReader( socket.getInputStream() ) );
-    
+	private AppDesign appDesign;
+	private ProcessDesign processDesign;
+	private KeylogDesign keylogDesign;
 	public ClientListener(ClientDesign clientDesign) {
 		this.clientDesign = clientDesign;
 	}
 
+	// Connect [Done] ================================================================================
 	private void ConnectListener() throws IOException {
 		boolean test = true;
 		try {
 			int port = 6789;
 			Client.client = new Socket(clientDesign.txtIP.getText(), port);
 		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Error!" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Cannot connect to " + e.getMessage());
             test = false;
             Client.client = null;
-			//e.printStackTrace();
 		}
 		if(test) {
             JOptionPane.showMessageDialog(null, "Connected successfully!");
@@ -46,7 +45,8 @@ public class ClientListener implements ActionListener{
             Client.out = new BufferedWriter(new OutputStreamWriter(Client.client.getOutputStream()));
 		}
 	}
-		
+	// ===============================================================================================
+	
 	private void AppListener() throws IOException {
 		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
@@ -54,10 +54,11 @@ public class ClientListener implements ActionListener{
 		}
 		String s = "APPLICATION";
 		Client.out.write(s);
+		Client.out.newLine();
 		Client.out.flush();
-		new AppDesign().setVisible(true);
+		this.appDesign.main(null);
 	}
-	
+		
 	private void ProcessListener() throws IOException {
 		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
@@ -65,23 +66,12 @@ public class ClientListener implements ActionListener{
 		}
 		String s = "PROCESS";
 		Client.out.write(s);
+		Client.out.newLine();
 		Client.out.flush();
-		new ProcessDesign().setVisible(true);
+		this.processDesign.main(null);
 	}
 	
-	private void ExitListener() throws IOException {
-		String s = "EXIT";
-		if(Client.client != null) {
-			Client.out.write(s);
-			Client.out.newLine();
-			Client.out.flush();
-			Client.client.close();
-		}
-		clientDesign.setVisible(false);
-		// THOAT FRAME
-	}
-	
-	
+
 	private void KeylogListener() throws IOException{
 		if(Client.client == null) {
 			JOptionPane.showMessageDialog(null, "Not connected to the server");
@@ -91,53 +81,73 @@ public class ClientListener implements ActionListener{
 		Client.out.write(s);
 		Client.out.newLine();
 		Client.out.flush();
-		new KeylogDesign().setVisible(true);
+		this.keylogDesign.main(null);
 		
+	} 
+	
+	private void ExitListener() throws IOException {
+		String s = "EXIT";
+		if(Client.client != null) {
+			Client.out.write(s);
+			Client.out.newLine();
+			Client.out.flush();
+		}
+		clientDesign.setVisible(false);
+		// THOAT FRAME
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		String click = e.getActionCommand();
+		
+		// Connect =================================
 		
 		if(click.equals("Connect"))
 			try {
-				ConnectListener() ;
+				this.ConnectListener() ;
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		
+		
+		// Application =============================
 		
 		if(click.equals("App Running"))
 			try {
-				AppListener();
+				this.AppListener();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		
+		
+		// Process ==================================
+
 		if(click.equals("Process Running"))
 			try {
-				ProcessListener();
+				this.ProcessListener();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		
+		
+		// Keystroke ==========================================
+		
+		if (click.equals("Keystroke"))
+		{
+			System.out.println("in keystroke");
+			try {
+				this.KeylogListener();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 		
 		
 		if(click.equals("Exit"))
 			try {
-				ExitListener();
+				this.ExitListener();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-		
-		if(click.equals("Keystroke"))
-			try {
-				KeylogListener();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			}		
 	}
-}
+}	

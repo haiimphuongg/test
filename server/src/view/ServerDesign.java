@@ -1,4 +1,3 @@
-
 package view;
 
 import java.awt.EventQueue;
@@ -31,7 +30,6 @@ public class ServerDesign extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

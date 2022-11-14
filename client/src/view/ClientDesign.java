@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import program.Client;
+import Program.Client;
 import controller.AppListener;
 import controller.ClientListener;
 
@@ -105,7 +105,7 @@ public class ClientDesign extends JFrame {
 		contentPane.add(btnShutdown);
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(ac);
+		//btnExit.addActionListener(ac);
 		btnExit.setBounds(300, 144, 120, 80);
 		contentPane.add(btnExit);
 	}

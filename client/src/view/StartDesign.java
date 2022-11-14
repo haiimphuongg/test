@@ -1,0 +1,83 @@
+package view;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Program.Client;
+import controller.StartListener;
+
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.JButton;
+
+public class StartDesign extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	public JTextField txtName;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StartDesign frame = new StartDesign();
+					frame.setVisible(true);
+					frame.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+							String s = "EXIT_START";
+							try {
+								Client.out.write(s);
+								Client.out.newLine();
+								Client.out.flush();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public StartDesign() {
+		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setResizable(false);
+		setTitle("Start");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 95);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		ActionListener ac = new StartListener(this);
+		
+		txtName = new JTextField(" Enter name: ");
+		
+		txtName.setBounds(21, 10, 295, 30);
+		txtName.setToolTipText("Enter name of app/process you want to start.");
+		contentPane.add(txtName);
+		txtName.setColumns(10);
+				
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(ac);
+		btnStart.setBounds(326, 9, 85, 31);
+		contentPane.add(btnStart);
+	}
+}

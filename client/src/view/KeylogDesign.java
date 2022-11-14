@@ -5,15 +5,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import controller.ClientListener;
 import controller.KeylogListener;
+import Program.Client;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 //import javax.swing.JLabel;
 import java.awt.Font;
+
 
 public class KeylogDesign extends JFrame{
 
@@ -31,25 +37,29 @@ public class KeylogDesign extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					KeylogDesign frame = new KeylogDesign();
 					frame.setVisible(true);
+					frame.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent e) {
+							String s = "EXIT_KEYSTROKE";
+							try {
+								Client.out.write(s);
+								Client.out.newLine();
+								Client.out.flush();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
-//	public KeylogDesign() {
-//		initialize();
-//
-//	}
 
 	/**
 	 * Initialize the contents of the frame.
