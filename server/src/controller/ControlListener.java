@@ -36,7 +36,7 @@ public class ControlListener {
 		}
 	    try
 	    {
-	       System.out.println("Restarting the PC after 5 seconds.");
+	       System.out.println("Restarting the PC after 20 seconds.");
 	       runtime.exec("shutdown -r -t 20");
 	    }
 	    catch(IOException e)
@@ -54,6 +54,10 @@ public class ControlListener {
 		else if(requestLine.equals("RESTART"))
 		{
 			this.RestartListener();
+		}
+		else if(requestLine.equals("EXIT_CONTROL"))
+		{
+			return;
 		}
 	}
 }
