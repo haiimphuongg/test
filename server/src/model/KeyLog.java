@@ -2,6 +2,7 @@ package model;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.NativeInputEvent;
+import com.github.kwhat.jnativehook.dispatcher.SwingDispatchService;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
@@ -55,38 +56,42 @@ public class KeyLog implements NativeKeyListener {
 		//System.out.println(keylog);
 	}
 	
-	public static void Keylogger(KeyLog keyLog)
+	public static void KeyLogger(KeyLog keyLog)
 	{
+		//GlobalScreen.setEventDispatcher(new SwingDispatchService());
 				//Bắt đầu bắt phím
+		
 				try {
+					System.out.println("Bat dau keylog");
+					GlobalScreen.addNativeKeyListener(keyLog);
 					GlobalScreen.registerNativeHook();
-					System.out.println("duoc ne ne");
+					//System.out.println("duoc ne ne");
 				}
-				catch (NativeHookException ex) {
-					System.out.println("loi ne");
+				catch (NativeHookException ex) {				
 					System.err.println("There was a problem registering the native hook.");
 					System.err.println(ex.getMessage());
-					System.out.println("loi ne");
 					System.exit(1);
 				}
-
-			    GlobalScreen.addNativeKeyListener(keyLog);
+		
+		
+			    
 	
 	}
 
 				
 	public static void UnKeyLogger(KeyLog keyLog) {
 			//Kết thúc bắt phím
-	
+		//GlobalScreen.setEventDispatcher(new SwingDispatchService());
 			try {
-				//System.out.println(keylog);
+				
 				GlobalScreen.removeNativeKeyListener(keyLog);
 	    		GlobalScreen.unregisterNativeHook();
-	    		System.out.println("Out duoc roi");
+	    		System.out.println("Day la keylog: " +keyLog.keylog);
+	    		//System.out.println("Out duoc roi");
 	    		
 			} catch (NativeHookException nativeHookException) {
 	    		//nativeHookException.printStackTrace();
-	    		System.out.println("Loi roi ne");
+	    		//System.out.println("Loi roi ne");
 			}
 			
 	
