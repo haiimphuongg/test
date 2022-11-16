@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.lang.System;
 import java.util.Scanner;
 
-import javax.smartcardio.CommandAPDU;
-import javax.swing.JOptionPane;
-
-
 import Program.Server;
 
 public class AppListener {	
