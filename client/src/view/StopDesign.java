@@ -10,8 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Program.Client;
 import controller.StopListener;
+import model.Client;
 
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;

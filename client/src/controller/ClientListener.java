@@ -11,7 +11,7 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-import Program.Client;
+import model.Client;
 import view.AppDesign;
 import view.ClientDesign;
 import view.ControlDesign;

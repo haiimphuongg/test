@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 
 import controller.ClientListener;
 import controller.KeylogListener;
-import Program.Client;
+import model.Client;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

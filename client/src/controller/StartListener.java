@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import model.*;
 import view.*;
-import Program.*;
 
 public class StartListener implements ActionListener {
 	private StartDesign startDesign;

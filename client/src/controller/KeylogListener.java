@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import Program.Client;
+import model.Client;
 import view.ClientDesign;
 import view.KeylogDesign;
 

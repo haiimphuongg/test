@@ -14,8 +14,8 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import Program.Client;
 import controller.AppListener;
+import model.Client;
 
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;

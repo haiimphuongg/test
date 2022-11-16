@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import Program.Client;
 import controller.ControlListener;
+import model.Client;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

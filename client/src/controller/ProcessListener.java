@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.swing.table.DefaultTableModel;
 
-import Program.*;
+import model.*;
 import view.*;
 
 

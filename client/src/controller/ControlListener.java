@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import Program.Client;
+import model.Client;
 import view.ControlDesign;
 
 public class ControlListener implements ActionListener {

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import Program.Client;
+import model.Client;
 import view.StopDesign;
 
 public class StopListener implements ActionListener{
