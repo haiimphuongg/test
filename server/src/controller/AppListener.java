@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.System;
 import java.util.Scanner;
 
+import javax.smartcardio.CommandAPDU;
 import javax.swing.JOptionPane;
 
 
@@ -85,7 +86,8 @@ public class AppListener {
 					return;
 				}
 				try {
-					Process process = new ProcessBuilder(nameApp + ".exe").start();
+					//Process process = new ProcessBuilder(nameApp + ".exe").start();
+					Runtime.getRuntime().exec("powershell -command \"Start-Process " + nameApp);
 					Server.out.write("Start " + nameApp);
 					Server.out.newLine();
 					Server.out.flush();

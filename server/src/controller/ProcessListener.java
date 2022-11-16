@@ -67,7 +67,8 @@ public class ProcessListener {
 					return;
 				}
 				try {
-					Process process = new ProcessBuilder(nameApp + ".exe").start();
+					Runtime.getRuntime().exec("powershell -command \"Start-Process " + nameApp);
+					//Process process = new ProcessBuilder(nameApp + ".exe").start();
 					Server.out.write("Start " + nameApp);
 					Server.out.newLine();
 					Server.out.flush();
